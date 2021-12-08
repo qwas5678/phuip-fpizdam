@@ -22,10 +22,6 @@ func NewRequester(resource, cookie string, delay time.Duration) (*Requester, err
 	if err != nil {
 		return nil, fmt.Errorf("url.Parse failed: %v", err)
 	}
-	if !strings.HasSuffix(u.Path, ".php") {
-		return nil, fmt.Errorf("well I believe the url must end with \".php\". " +
-			"Maybe I'm wrong, delete this check if you feel like it")
-	}
 
 	nextProto := make(map[string]func(authority string, c *tls.Conn) http.RoundTripper)
 	disableRedirects := func(_ *http.Request, _ []*http.Request) error { return http.ErrUseLastResponse }
